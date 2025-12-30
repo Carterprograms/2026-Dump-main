@@ -23,19 +23,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.Constants.CANDevices;
 import frc.robot.Constants.DriveConstants;
-/*import frc.robot.Constants.VisionConstants;*/
+import frc.robot.Constants.VisionConstants;
 import frc.robot.util.limelight.LimelightPoseEstimator;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class SwerveSys extends SubsystemBase {
-
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx");
-    NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry ta = table.getEntry("ta");
 
     //PathPlanner config
     RobotConfig config;
@@ -118,10 +109,10 @@ public class SwerveSys extends SubsystemBase {
             VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(0.25)),
             VecBuilder.fill(0.35, 0.35, Units.degreesToRadians(30.0)));
 
-    /*private final LimelightPoseEstimator[] limelightPoseEstimators = new LimelightPoseEstimator[] {
+    private final LimelightPoseEstimator[] limelightPoseEstimators = new LimelightPoseEstimator[] {
         new LimelightPoseEstimator(VisionConstants.frontLimelightName),
         new LimelightPoseEstimator(VisionConstants.backLimelightName)
-    };*/
+    };
 
     public void resetPPPose(Pose2d pose) {
         setPose(pose);
@@ -187,25 +178,12 @@ public class SwerveSys extends SubsystemBase {
         // Updates the odometry every 20ms
         poseEstimator.update(imu.getRotation2d(), getModulePositions());
 
-        /*for(LimelightPoseEstimator limelightPoseEstimator : limelightPoseEstimators) {
+        for(LimelightPoseEstimator limelightPoseEstimator : limelightPoseEstimators) {
             Optional<Pose2d> limelightPose = limelightPoseEstimator.getRobotPose();
             if(limelightPose.isPresent()) {
                 poseEstimator.addVisionMeasurement(limelightPose.get(), limelightPoseEstimator.getCaptureTimestamp());
-                //System.out.println(limelightPose.get());
-                //System.out.println("tx is: " + tx.getDouble(0));
-                //System.out.println("ty is: " + ty.getDouble(0));
-                //System.out.println("ta is: " + ta.getDouble(0.20)); 
-                //System.out.println("Hello World");
             }
-        }*/
-    //read values periodically
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.20);
-    //post to smart dashboard periodically
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
+        }
     }
     
     /**
@@ -529,16 +507,4 @@ public class SwerveSys extends SubsystemBase {
                 getPose().getTranslation(),
                 DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red ? Rotation2d.fromDegrees(180) : Rotation2d.fromDegrees(0)));
     }
-
-    /**
-     * Sets the current limit of the drive motors of each module to the desired amperage.
-     * 
-     * @param amps The desired current limit of the drive motors in amps.
-     */
-    /*public void setDriveCurrentLimit(int amps) {
-        frontLeftMod.setDriveCurrentLimit(amps);
-        frontRightMod.setDriveCurrentLimit(amps);
-        backLeftMod.setDriveCurrentLimit(amps);
-        backRightMod.setDriveCurrentLimit(amps);
-    }*/
 }

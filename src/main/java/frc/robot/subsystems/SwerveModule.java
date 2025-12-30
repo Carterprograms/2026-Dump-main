@@ -188,7 +188,7 @@ public class SwerveModule extends SubsystemBase {
         
         // Optimizes speed and angle to minimize change in heading
         // (e.g. module turns 1 degree and reverses drive direction to get from 90 degrees to -89 degrees)
-        desiredState = SwerveModuleState.optimize(desiredState, getSteerEncAngle());
+        desiredState.optimize(getSteerEncAngle());
 
         // Scale velocity based on turn error to help prevent skew.
         double angleErrorRad = desiredState.angle.getRadians() - getSteerEncAngle().getRadians();
