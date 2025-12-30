@@ -10,21 +10,6 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public class Constants {
 
-    public static final class ButtonPanelConstants {
-        public static final int lvl4ReefRightPort = 1;
-        public static final int lvl4ReefLeftPort = 2;
-        public static final int lvl3ReefRightPort = 3;
-        public static final int lvl3ReefLeftPort = 4;
-        public static final int lvl2ReefRightPort = 5;
-        public static final int lvl2ReefLeftPort = 6;
-        public static final int lvl1ReefLeftPort = 7;
-        public static final int lvl1ReefRightPort = 8;
-        public static final int releaseCoralPort = 9;
-        public static final int conveyorControlPort = 10;
-        public static final int conveyorRunPort = 11;
-        public static final int joystickPort = 13;
-    }
-
     public static final class CANDevices {
         // Set these CAN ID values to the those of your robot, or change your CAN ID's to match this convention.
 
@@ -50,24 +35,6 @@ public class Constants {
         public static final int backRightCanCoderId = 13;
         public static final int backRightSteerMtrId = 7;
         public static final int backRightDriveMtrId = 8;
-
-        //Rollers
-        public static final int m_topLeftRollerMtrId = 19;
-        public static final int m_bottomLeftRollerMtrId = 18;
-        public static final int m_topRightRollerMtrId = 17;
-        public static final int m_bottomRightRollerMtrId = 16;
-        public static final int m_rightIntakeMtrId = 15;
-        public static final int m_leftIntakeMtrId = 14;
-
-        //Lift
-        public static final int m_rightLiftMtrId = 22;
-        public static final int m_leftLiftMtrId = 21;
-
-        //Conveyor
-        public static final int m_conveyorMtrId = 20;
-
-        //EndEffector
-        public static final int m_coralReleaseSevCnl = 9;
        
     }
 
@@ -178,8 +145,8 @@ public class Constants {
     public static final class AutoConstants {
 
         // These drive and rotation PID constants most likely need to be tuned for better accuracy.
-        public static final double drivekP = 2.0 * 4.0; // 12.8
-        public static final double drivekD = 0.02 * 4.0; //0.0625; // .085
+        public static final double drivekP = 2.0 * 4.0;
+        public static final double drivekD = 0.02 * 4.0;
 
         public static final double rotkP = 5.5; // 1.27
         public static final double rotkD = 0.5; // 0.5
