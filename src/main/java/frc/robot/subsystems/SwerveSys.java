@@ -21,6 +21,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.CANDevices;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.VisionConstants;
@@ -110,8 +111,7 @@ public class SwerveSys extends SubsystemBase {
             VecBuilder.fill(0.35, 0.35, Units.degreesToRadians(30.0)));
 
     private final LimelightPoseEstimator[] limelightPoseEstimators = new LimelightPoseEstimator[] {
-        new LimelightPoseEstimator(VisionConstants.frontLimelightName),
-        new LimelightPoseEstimator(VisionConstants.backLimelightName)
+        new LimelightPoseEstimator(VisionConstants.limeLightName)
     };
 
     public void resetPPPose(Pose2d pose) {
@@ -153,8 +153,8 @@ public class SwerveSys extends SubsystemBase {
             this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             (speeds, feedforwards) -> setChassisSpeeds(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-                    new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
+                    new PIDConstants(AutoConstants.drivekP, 0.0, AutoConstants.drivekD), // Translation PID constants
+                    new PIDConstants(AutoConstants.rotkP, 0.0, AutoConstants.rotkD) // Rotation PID constants
             ),
             config, // The robot configuration
             () -> {
